@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\code\\kingkong\\csharp\\MySerialPortApp\\MySerialPortApp\\MySerialPortApp.csproj": {}
+    "D:\\code\\CSharp\\MySerialPortApp\\MySerialPortApp.csproj": {}
   },
   "projects": {
-    "D:\\code\\kingkong\\csharp\\MySerialPortApp\\MySerialPortApp\\MySerialPortApp.csproj": {
+    "D:\\code\\CSharp\\MySerialPortApp\\MySerialPortApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\code\\kingkong\\csharp\\MySerialPortApp\\MySerialPortApp\\MySerialPortApp.csproj",
+        "projectUniqueName": "D:\\code\\CSharp\\MySerialPortApp\\MySerialPortApp.csproj",
         "projectName": "MySerialPortApp",
-        "projectPath": "D:\\code\\kingkong\\csharp\\MySerialPortApp\\MySerialPortApp\\MySerialPortApp.csproj",
-        "packagesPath": "C:\\Users\\kingk\\.nuget\\packages\\",
-        "outputPath": "D:\\code\\kingkong\\csharp\\MySerialPortApp\\MySerialPortApp\\obj\\",
+        "projectPath": "D:\\code\\CSharp\\MySerialPortApp\\MySerialPortApp.csproj",
+        "packagesPath": "C:\\Users\\kingkong\\.nuget\\packages\\",
+        "outputPath": "D:\\code\\CSharp\\MySerialPortApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\kingk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kingkong\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

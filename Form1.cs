@@ -56,7 +56,7 @@ namespace MySerialPortApp
             {
                 textBoxRecive.Text += textBoxRecive.Text == "" ? "" : "\r\n";
                 char[] revTxtCharArray = revTxt.ToCharArray();
-                foreach(var letter in revTxtCharArray)
+                foreach (var letter in revTxtCharArray)
                 {
                     textBoxRecive.Text += Convert.ToInt32(letter) + " ";
                 }
@@ -84,26 +84,74 @@ namespace MySerialPortApp
         {
             if (!serialPort.IsOpen)
             {
-                if(comboBoxPorts.SelectedIndex == -1)
+                try
                 {
-                    MessageBox.Show("所选端口无效！");
-                    return;
-                }
-                //设置串口名，数据位，波特率
-                serialPort.PortName = comboBoxPorts.SelectedItem.ToString();
-                serialPort.DataBits = (int)comboBoxDataBit.SelectedItem;
-                serialPort.BaudRate = (int)comboBoxBaudRate.SelectedItem;
+                    if (comboBoxPorts.SelectedIndex == -1)
+                    {
+                        MessageBox.Show("所选端口无效！");
+                        return;
+                    }
+                    //设置串口名，数据位，波特率
+                    serialPort.PortName = comboBoxPorts.SelectedItem.ToString();
+                    serialPort.DataBits = (int)comboBoxDataBit.SelectedItem;
+                    serialPort.BaudRate = (int)comboBoxBaudRate.SelectedItem;
 
-                //设置停止位
-                switch (comboBoxStopBit.SelectedItem.ToString())
+                    //设置停止位"1","1.5","2"
+                    switch (comboBoxStopBit.SelectedItem.ToString())
+                    {
+                        case "1": serialPort.StopBits = StopBits.One; break;
+                        case "1.5": serialPort.StopBits = StopBits.OnePointFive; break;
+                        case "2": serialPort.StopBits = StopBits.Two; break;
+                        default: MessageBox.Show(String.Format("停止位参数：{0}  错误。无效参数！"), comboBoxStopBit.SelectedItem.ToString()); break;
+                    }
+                    //设置校验位"None", "Odd", "Even", "Mark", "Space" 
+                    switch (comboBoxCheckBit.SelectedIndex.ToString())
+                    {
+                        case "None": serialPort.Parity = Parity.None; break;
+                        case "Odd": serialPort.Parity = Parity.Odd; break;
+                        case "Even": serialPort.Parity = Parity.Even; break;
+                        case "Mark": serialPort.Parity = Parity.Mark; break;
+                        case "Space": serialPort.Parity = Parity.Space; break;
+                        default: MessageBox.Show(String.Format("校验位参数：{0} 错误。无效参数！"), comboBoxCheckBit.SelectedIndex.ToString()); break;
+                    }
+
+                    //开启串口后，无法再修改参数
+                    serialPort.Open();
+                    comboBoxBaudRate.Enabled = false;
+                    comboBoxCheckBit.Enabled = false;
+                    comboBoxDataBit.Enabled = false;
+                    comboBoxPorts.Enabled = false;
+                    comboBoxStopBit.Enabled = false;
+                    radioButtonReciveASCII.Enabled = false;
+                    radioButtonReciveHEX.Enabled = false;
+                    buttonSend.Enabled = true;
+
+                    //开启之后，修改按钮文本
+                    buttonOpenPorts.Text = "关闭串口";
+                }
+                catch (Exception ex)
                 {
-                    case "1":serialPort.StopBits=StopBits.One; break;
-                    case "1.5":serialPort.StopBits = StopBits.OnePointFive;break;
-                    case "2":serialPort.StopBits = StopBits.Two;break;
-                        default:MessageBox.Show("");break;
+                    MessageBox.Show("打开串口出错：" + ex.Message, "Error");
                 }
 
+            }
 
+            else
+            {
+                //关闭串口
+                serialPort.Close();
+                comboBoxBaudRate.Enabled = true;
+                comboBoxCheckBit.Enabled = true;
+                comboBoxDataBit.Enabled = true;
+                comboBoxPorts.Enabled = true;
+                comboBoxStopBit.Enabled = true;
+
+                //修改按钮文本
+                buttonOpenPorts.Text = "打开串口";
+
+                radioButtonReciveASCII.Enabled = true;
+                radioButtonReciveHEX.Enabled = true;
+                buttonSend.Enabled = false;
             }
         }
     }
